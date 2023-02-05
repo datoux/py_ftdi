@@ -1,5 +1,6 @@
 from distutils.core import setup, Extension
 import sys
+import platform
 
 def main():
 
@@ -8,8 +9,12 @@ def main():
 
     if sys.platform == "darwin":
         define_macros=[('FITPIX_LIBFTDI', '1')]
-        include_dirs=["ftdi/mac/arm64"]
-        extra_objects=["ftdi/mac/arm64/libftdi1.a", "ftdi/mac/arm64/libusb-1.0.a"]
+        if platform.machine() == "arm64":
+            include_dirs=["ftdi/mac/arm64"]
+            extra_objects=["ftdi/mac/arm64/libftdi1.a", "ftdi/mac/arm64/libusb-1.0.a"]
+        else:
+            include_dirs=["ftdi/mac/x64"]
+            extra_objects=["ftdi/mac/x64/libftdi1.a", "ftdi/mac/x64/libusb-1.0.a"]
 
 
     if sys.platform == "linux":
