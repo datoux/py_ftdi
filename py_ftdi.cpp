@@ -142,9 +142,9 @@ static PyObject* device_read(Device* self, PyObject *args)
     if (!self->dev)
         return Py_BuildValue("i", -1000);
 
-    Buffer<char> buff(size + 1);
+    Buffer<unsigned char> buff(size + 1);
     buff.zero();
-    int rc = self->dev->receive(buff.data(), size, size, timeout);
+    int rc = self->dev->receive((char*)buff.data(), size, size, timeout);
     PyObject* list = PyList_New(2);
 
     PyObject* dataout = PyList_New(rc > 0 ? rc : 0);
