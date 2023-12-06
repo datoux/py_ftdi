@@ -1,6 +1,7 @@
-from distutils.core import setup, Extension
-import sys
 import platform
+import sys
+from distutils.core import Extension, setup
+
 
 def main():
 
@@ -29,7 +30,7 @@ def main():
 
 
     setup(name="py_ftdi",
-            version="1.0.0",
+            version="1.1.0",
             description="ftdi library",
             author="Daniel Turecek",
             author_email="daniel@turecek.de",
