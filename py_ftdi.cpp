@@ -49,14 +49,15 @@ static PyObject* device_open(Device* self, PyObject *args)
     (void)self;
     const char* devName;
     int baud;
-    if (!PyArg_ParseTuple(args, "si", &devName, &baud))
+    int interface;
+    if (!PyArg_ParseTuple(args, "sii", &devName, &baud, &interface))
         return NULL;
 
     if (self->dev)
         self->dev->closeDevice();
 
     self->dev = new FtdiDev(devName, false);
-    int rc = self->dev->openDevice(false);
+    int rc = self->dev->openDevice(false, 0, interface);
     if (baud != 0)
         self->dev->setBaudRate(baud);
 
@@ -166,7 +167,7 @@ static PyMemberDef device_members[] =
 static PyMethodDef device_methods[] =
 {
     {"list_devices", (PyCFunction)device_listDevices, METH_VARARGS, "list_devices()"},
-    {"open", (PyCFunction)device_open, METH_VARARGS, "open(dev_name,baud)"},
+    {"open", (PyCFunction)device_open, METH_VARARGS, "open(dev_name,baud,interface_index)"},
     {"close", (PyCFunction)device_close, METH_VARARGS, "close()"},
     {"set_sync_mode", (PyCFunction)device_setSyncMode, METH_VARARGS, "set_sync_mode(is_sync_mode)"},
     {"is_connected", (PyCFunction)device_isConnected, METH_VARARGS, "is_connected()"},
