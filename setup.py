@@ -30,15 +30,22 @@ def main():
 
 
     setup(name="py_ftdi",
-            version="1.1.0",
-            description="ftdi library",
+            version="1.1.1",
+            description="FTDI library",
             author="Daniel Turecek",
             author_email="daniel@turecek.de",
+            packages=["py_ftdi"],
+            package_dir={"py_ftdi": "py_ftdi"},
+            package_data={"py_ftdi": [
+                "__init__.pyi",
+                "py.typed",
+            ]},
+            include_package_data=True,
             ext_modules=[
                  Extension(
                     "py_ftdi",
-                    sources=["py_ftdi.cpp",
-                             "ftdidev.cpp" ],
+                    sources=["py_ftdi/py_ftdi.cpp",
+                             "py_ftdi/ftdidev.cpp" ],
                     define_macros=define_macros,
                     include_dirs=include_dirs,
                     extra_objects=extra_objects

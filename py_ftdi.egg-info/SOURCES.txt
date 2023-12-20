@@ -1,0 +1,12 @@
+README.md
+setup.cfg
+setup.py
+py_ftdi/__init__.py
+py_ftdi/__init__.pyi
+py_ftdi/ftdidev.cpp
+py_ftdi/py.typed
+py_ftdi/py_ftdi.cpp
+py_ftdi.egg-info/PKG-INFO
+py_ftdi.egg-info/SOURCES.txt
+py_ftdi.egg-info/dependency_links.txt
+py_ftdi.egg-info/top_level.txt
