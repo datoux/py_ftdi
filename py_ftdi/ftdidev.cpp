@@ -327,8 +327,19 @@ int FtdiDev::openDevice(bool flowControl, unsigned vidpid, unsigned intf)
         FT_SetVIDPID(vid, pid);
     }
 #endif
+    std::string nameOrSerial = mNameOrSerial;
+
+    if (nameOrSerial.size() > 0 && intf > 0 && intf < 5) {
+        char lastChar = nameOrSerial[nameOrSerial.size() - 1];
+        char endChars[] = {' ', 'A', 'B', 'C', 'D'};
+        if (lastChar != endChars[intf]) {
+            nameOrSerial += " ";
+            nameOrSerial += endChars[intf];
+        }
+    }
+
     mFlowControl = flowControl;
-    FT_STATUS fts = FT_OpenEx(const_cast<char*>(mNameOrSerial.c_str()),
+    FT_STATUS fts = FT_OpenEx(const_cast<char*>(nameOrSerial.c_str()),
                               mIsSerial ? FT_OPEN_BY_SERIAL_NUMBER : FT_OPEN_BY_DESCRIPTION,
                               (FT_HANDLE*)&mHandle);
     if (fts != FT_OK){

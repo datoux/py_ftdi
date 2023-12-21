@@ -4,7 +4,7 @@ devs = py_ftdi.list_devices()
 print(devs)
 
 dev = py_ftdi.Device()
-rc = dev.open(devs[0], 0)
+rc = dev.open(devs[0], 0, 0)
 print(rc)
 
 rc = dev.set_sync_mode(1)
