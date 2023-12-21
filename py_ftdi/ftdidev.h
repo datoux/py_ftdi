@@ -41,7 +41,7 @@ public:
     virtual ~FtdiDev();
 
 public:
-    int openDevice(bool flowControl = true, unsigned vidpid = 0, unsigned interface = 0);
+    int openDevice(bool flowControl = true, unsigned vidpid = 0, unsigned intf = 0);
     int closeDevice();
     bool isConnected();
     int setBitMode(FtdiBitMode mode);

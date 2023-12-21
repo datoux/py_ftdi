@@ -30,7 +30,7 @@ def main():
 
 
     setup(name="py_ftdi",
-            version="1.1.1",
+            version="1.1.2",
             description="FTDI library",
             author="Daniel Turecek",
             author_email="daniel@turecek.de",

@@ -315,7 +315,8 @@ int FtdiDev::listDevicesByVidpid(unsigned long vidpids[], size_t size, std::vect
     return 0;
 }
 
-int FtdiDev::openDevice(bool flowControl, unsigned vidpid)
+
+int FtdiDev::openDevice(bool flowControl, unsigned vidpid, unsigned intf)
 {
     (void)vidpid;
 #ifndef WIN32
@@ -968,7 +969,7 @@ int FtdiDev::listDevicesByVidpid(unsigned long vidpids[], size_t size, std::vect
     return 0;
 }
 
-int FtdiDev::openDevice(bool flowControl, unsigned vidpid, unsigned interface)
+int FtdiDev::openDevice(bool flowControl, unsigned vidpid, unsigned intf)
 {
     mFlowControl = flowControl;
     if (ftdi_init((FT_HANDLE*)mHandle) < 0) {
@@ -976,8 +977,8 @@ int FtdiDev::openDevice(bool flowControl, unsigned vidpid, unsigned interface)
         return -1;
     }
 
-    if (interface > 0)
-        ftdi_set_interface((FT_HANDLE*)mHandle, (enum ftdi_interface)interface);
+    if (intf > 0)
+        ftdi_set_interface((FT_HANDLE*)mHandle, (enum ftdi_interface)intf);
 
     unsigned vid = 0x403;
     unsigned pid = 0x6010;
